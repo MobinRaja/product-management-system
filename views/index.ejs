@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Product Management System</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 50px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-content p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info {
+            margin-top: 15px;
+        }
+
+        .contact-link {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .contact-link:hover {
+            color: #2ecc71;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive adjustment for mobile */
+        @media (max-width: 600px) {
+            .contact-link {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1>Product Management System</h1>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/categories">Categories</a></li>
+                <li><a href="/products">Products</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="hero">
+            <h2>Welcome to Product Management System</h2>
+            <p>Manage your categories and products efficiently</p>
+            
+            <div class="cards">
+                <div class="card">
+                    <h3>Categories</h3>
+                    <p>Manage product categories</p>
+                    <a href="/categories" class="btn btn-primary">View Categories</a>
+                </div>
+                
+                <div class="card">
+                    <h3>Products</h3>
+                    <p>Manage products with pagination</p>
+                    <a href="/products" class="btn btn-primary">View Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+    <div class="footer-content">
+        <p>&copy; 2026 Product Management System | Developed by <strong>Mobin Raja</strong></p>
+        <div class="contact-info">
+            <a href="mailto:mobin2002raza@gmail.com" class="contact-link">📧 mobin2002raza@gmail.com</a>
+            | 
+            <a href="tel:+919284688056  " class="contact-link">📞 +91 9284688056</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

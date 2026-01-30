@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Product Management System</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1>Product Management System</h1>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/categories">Categories</a></li>
+                <li><a href="/products">Products</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="header-section">
+            <h2>Products</h2>
+            <a href="/products/create" class="btn btn-primary">Add New Product</a>
+        </div>
+        
+        <% if (typeof message !== 'undefined' && message) { %>
+            <div class="alert alert-success"><%= message %></div>
+        <% } %>
+        
+        <div class="pagination-info">
+            <p>Showing page <%= pagination.currentPage %> of <%= pagination.totalPages %> 
+               (Total Records: <%= pagination.totalRecords %>)</p>
+        </div>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ProductId</th>
+                    <th>ProductName</th>
+                    <th>CategoryId</th>
+                    <th>CategoryName</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (products.length > 0) { %>
+                    <% products.forEach(product => { %>
+                        <tr>
+                            <td><%= product.ProductId %></td>
+                            <td><%= product.ProductName %></td>
+                            <td><%= product.CategoryId %></td>
+                            <td><%= product.CategoryName %></td>
+                            <td>$<%= product.price %></td>
+                            <td>
+                                <a href="/products/<%= product.ProductId %>/edit" class="btn btn-sm btn-warning">Edit</a>
+                                <form action="/products/<%= product.ProductId %>?_method=DELETE" method="POST" style="display: inline;">
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="6" class="text-center">No products found</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        
+        <!-- Pagination Controls -->
+        <div class="pagination">
+            <% if (pagination.currentPage > 1) { %>
+                <a href="/products?page=1&pageSize=<%= pagination.pageSize %>" class="btn btn-sm">First</a>
+                <a href="/products?page=<%= pagination.currentPage - 1 %>&pageSize=<%= pagination.pageSize %>" class="btn btn-sm">Previous</a>
+            <% } %>
+            
+            <% for (let i = Math.max(1, pagination.currentPage - 2); i <= Math.min(pagination.totalPages, pagination.currentPage + 2); i++) { %>
+                <a href="/products?page=<%= i %>&pageSize=<%= pagination.pageSize %>" 
+                   class="btn btn-sm <%= i === pagination.currentPage ? 'active' : '' %>">
+                    <%= i %>
+                </a>
+            <% } %>
+            
+            <% if (pagination.currentPage < pagination.totalPages) { %>
+                <a href="/products?page=<%= pagination.currentPage + 1 %>&pageSize=<%= pagination.pageSize %>" class="btn btn-sm">Next</a>
+                <a href="/products?page=<%= pagination.totalPages %>&pageSize=<%= pagination.pageSize %>" class="btn btn-sm">Last</a>
+            <% } %>
+        </div>
+        
+        <div class="page-size-selector">
+            <form action="/products" method="GET">
+                <label for="pageSize">Items per page:</label>
+                <select name="pageSize" id="pageSize" onchange="this.form.submit()">
+                    <option value="5" <%= pagination.pageSize === 5 ? 'selected' : '' %>>5</option>
+                    <option value="10" <%= pagination.pageSize === 10 ? 'selected' : '' %>>10</option>
+                    <option value="20" <%= pagination.pageSize === 20 ? 'selected' : '' %>>20</option>
+                    <option value="50" <%= pagination.pageSize === 50 ? 'selected' : '' %>>50</option>
+                </select>
+            </form>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 Product Management System</p>
+    </footer>
+</body>
+</html>
